@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script>
+        window.onload = function() {
+            // Fetch the XML file
+            fetch('data.xml')
+                .then(response => response.text())
+                .then(data => {
+                    // Parse the XML string
+                    let parser = new DOMParser();
+                    let xmlDoc = parser.parseFromString(data, "text/xml");
+                    
+                    // Get the IP text
+                    let ip = xmlDoc.getElementsByTagName("ip")[0].childNodes[0].nodeValue.trim();
+                    
+                    // Format and redirect
+                    if (!/^https?:\/\//i.test(ip)) {
+                        ip = 'http://' + ip;
+                    }
+                    window.location.replace(ip);
+                })
+                .catch(error => {
+                    console.error('Error loading redirect target:', error);
+                });
+        };
+    </script>
+</head>
+<body>
+    <p>If you are not redirected automatically, please wait...</p>
+</body>
+</html>
