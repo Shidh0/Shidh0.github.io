@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="robots" content="index, follow">
-    <meta name="google-site-verification" content="rGU35hnxP728gYDUdgjJ3cxbEa7KkTEN6ia_Xll0pgg" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official Instadowply page.">
-    <title>InstaDowply</title>
-    
+    <title>My Website</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+    <script>
+        // Fetch the IP from your XML file and load it into the iframe
+        window.onload = function() {
+            fetch('data.xml')
+                .then(response => response.text())
+                .then(data => {
+                    let parser = new DOMParser();
+                    let xmlDoc = parser.parseFromString(data, "text/xml");
+                    let ip = xmlDoc.getElementsByTagName("ip")[0].childNodes[0].nodeValue.trim();
+                    
+                    if (!/^https?:\/\//i.test(ip)) {
+                        ip = 'http://' + ip;
+                    }
+                    
+                    // Set the iframe source to your dynamic IP
+                    document.getElementById('site-frame').src = ip;
+                })
+                .catch(error => console.error('Error:', error));
+        };
+    </script>
+</head>
 <body>
 
-    <h1>yoo</h1>
+    <iframe id="site-frame" src=""></iframe>
+
 </body>
 </html>
