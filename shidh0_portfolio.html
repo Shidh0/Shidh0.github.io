@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shidh0 | Developer Portfolio</title>
+    <!-- Tailwind CSS for layout, proportions, and utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for crisp, modern icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#0a0f1c', // Deep navy/almost black
+                            surface: '#111827',
+                            primary: '#00f2fe', // Neon Cyan
+                            secondary: '#4facfe', // Bright Blue
+                            accent: '#a855f7', // Vivid Purple
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'blob': {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0f1c;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(17, 24, 39, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0, 242, 254, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Animations setup */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0f1c; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-primary selection:text-brand-bg">
+
+    <!-- Background Ambient Effects -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-primary/10 mix-blend-screen filter blur-[100px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-brand-accent/10 mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-brand-secondary/10 mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center rounded-2xl p-4 transition-all duration-300" id="nav-container">
+            <a href="#" class="text-2xl font-bold tracking-tighter flex items-center gap-2 group">
+                <i class="ph-fill ph-code text-brand-primary group-hover:rotate-12 transition-transform"></i>
+                <span class="text-gradient">Shidh0</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#home" class="hover:text-brand-primary transition-colors hover:shadow-[0_2px_0_0_#00f2fe] pb-1">Home</a>
+                <a href="#about" class="hover:text-brand-primary transition-colors hover:shadow-[0_2px_0_0_#00f2fe] pb-1">About</a>
+                <a href="#projects" class="hover:text-brand-primary transition-colors hover:shadow-[0_2px_0_0_#00f2fe] pb-1">Projects</a>
+                <a href="#contact" class="hover:text-brand-primary transition-colors hover:shadow-[0_2px_0_0_#00f2fe] pb-1">Contact</a>
+            </div>
+
+            <a href="https://github.com/Shidh0" target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-brand-primary/50 transition-all">
+                <i class="ph ph-github-logo text-lg"></i>
+                <span>GitHub</span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl text-slate-300 hover:text-white" onclick="toggleMobileMenu()">
+                <i class="ph ph-list" id="menu-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-brand-bg/95 backdrop-blur-lg flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 md:hidden">
+        <a href="#home" class="text-2xl font-semibold text-slate-200 hover:text-brand-primary transition-colors" onclick="toggleMobileMenu()">Home</a>
+        <a href="#about" class="text-2xl font-semibold text-slate-200 hover:text-brand-primary transition-colors" onclick="toggleMobileMenu()">About</a>
+        <a href="#projects" class="text-2xl font-semibold text-slate-200 hover:text-brand-primary transition-colors" onclick="toggleMobileMenu()">Projects</a>
+        <a href="#contact" class="text-2xl font-semibold text-slate-200 hover:text-brand-primary transition-colors" onclick="toggleMobileMenu()">Contact</a>
+        <a href="https://github.com/Shidh0" target="_blank" class="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-primary text-brand-bg font-bold mt-4" onclick="toggleMobileMenu()">
+            <i class="ph-fill ph-github-logo text-xl"></i> Github Profile
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-brand-primary/30 text-brand-primary text-sm font-medium mb-8 reveal">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-primary"></span>
+                </span>
+                Available for new opportunities
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 reveal reveal-delay-1">
+                Hi, I'm <br class="md:hidden" />
+                <span class="text-gradient">Shidh0</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed reveal reveal-delay-2">
+                I build responsive, modern, and visually stunning digital experiences. Turning complex problems into elegant interfaces.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-3">
+                <a href="#projects" class="px-8 py-4 rounded-full bg-brand-primary text-brand-bg font-bold w-full sm:w-auto hover:bg-white transition-colors flex items-center justify-center gap-2 group">
+                    View My Work
+                    <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="https://github.com/Shidh0" target="_blank" class="px-8 py-4 rounded-full glass hover:bg-white/10 transition-colors w-full sm:w-auto flex items-center justify-center gap-2">
+                    <i class="ph ph-github-logo text-xl"></i>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+            <span class="text-xs uppercase tracking-widest">Scroll</span>
+            <i class="ph ph-arrow-down"></i>
+        </div>
+    </section>
+
+    <!-- About & Skills Section -->
+    <section id="about" class="py-24 px-6 border-t border-white/5 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Visual / Photo area -->
+                <div class="relative reveal">
+                    <div class="aspect-square rounded-3xl overflow-hidden glass p-2 relative group">
+                        <!-- Abstract placeholder for profile image -->
+                        <div class="w-full h-full rounded-2xl bg-gradient-to-br from-brand-surface to-brand-bg border border-white/10 flex items-center justify-center relative overflow-hidden">
+                            <i class="ph-duotone ph-user text-9xl text-white/10"></i>
+                            
+                            <!-- Animated overlay grid -->
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+                        </div>
+                        
+                        <!-- Floating decorative elements -->
+                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-brand-primary/20 rounded-full blur-xl animate-float"></div>
+                        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-brand-accent/20 rounded-full blur-xl animate-float" style="animation-delay: -3s;"></div>
+                    </div>
+                </div>
+
+                <!-- Text & Skills -->
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">About <span class="text-gradient">Me</span></h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        I'm a passionate developer focusing on building robust and aesthetic web applications. I love merging logic with creative design to deliver seamless user experiences. Always exploring new frameworks and pushing the boundaries of what's possible on the web.
+                    </p>
+
+                    <h3 class="text-xl font-semibold mb-4 text-white flex items-center gap-2">
+                        <i class="ph-duotone ph-lightning text-brand-primary"></i> Tech Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <!-- Skill Tags -->
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">HTML5 / CSS3</span>
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">JavaScript (ES6+)</span>
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">React / Next.js</span>
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">Tailwind CSS</span>
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">Node.js</span>
+                        <span class="px-4 py-2 rounded-lg glass-card text-sm text-slate-300 hover:text-brand-primary hover:border-brand-primary cursor-default">Git / GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 border-t border-white/5 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Featured <span class="text-gradient">Projects</span></h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Here are 4 of my top repositories from GitHub. Crafting solutions one commit at a time.</p>
+            </div>
+
+            <!-- Projects Grid (Injected via JS) -->
+            <div id="projects-grid" class="grid md:grid-cols-2 gap-8">
+                <!-- Cards will be generated here -->
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <a href="https://github.com/Shidh0" target="_blank" class="inline-flex items-center gap-2 text-slate-400 hover:text-brand-primary transition-colors border-b border-transparent hover:border-brand-primary pb-1">
+                    View all projects on GitHub <i class="ph ph-arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 border-t border-white/5 relative">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="inline-block p-4 rounded-full bg-brand-primary/10 text-brand-primary mb-6">
+                <i class="ph-duotone ph-paper-plane-tilt text-4xl"></i>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Let's Work <span class="text-gradient">Together</span></h2>
+            <p class="text-slate-400 text-lg mb-10 max-w-xl mx-auto">
+                Currently looking for new opportunities. Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="mailto:hello@example.com" class="px-8 py-4 rounded-full bg-brand-primary text-brand-bg font-bold w-full sm:w-auto hover:bg-white transition-colors flex items-center justify-center gap-2">
+                    Say Hello
+                </a>
+                <div class="flex gap-4">
+                    <a href="https://github.com/Shidh0" target="_blank" class="w-14 h-14 rounded-full glass flex items-center justify-center text-xl hover:text-brand-primary hover:border-brand-primary transition-all">
+                        <i class="ph-fill ph-github-logo"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 rounded-full glass flex items-center justify-center text-xl hover:text-[#0a66c2] hover:border-[#0a66c2] transition-all">
+                        <i class="ph-fill ph-linkedin-logo"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 rounded-full glass flex items-center justify-center text-xl hover:text-[#1da1f2] hover:border-[#1da1f2] transition-all">
+                        <i class="ph-fill ph-twitter-logo"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center border-t border-white/5 text-sm text-slate-500">
+        <p>© 2026 Shidh0. Designed & Built with <i class="ph-fill ph-heart text-brand-accent"></i></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. PROJECT DATA CONFIGURATION ---
+        // Edit this array to match your actual 4 GitHub repositories!
+        const githubProjects = [
+            {
+                title: "E-Commerce API",
+                description: "A robust backend REST API built for modern e-commerce platforms. Features secure authentication, payment gateway integration, and optimized database queries.",
+                tags: ["Node.js", "Express", "MongoDB"],
+                link: "https://github.com/Shidh0/repo-1",
+                icon: "ph-database"
+            },
+            {
+                title: "Portfolio Template",
+                description: "A highly customizable, responsive portfolio template for developers. Utilizes modern CSS frameworks for sleek design and optimal performance.",
+                tags: ["HTML", "TailwindCSS", "JS"],
+                link: "https://github.com/Shidh0/repo-2",
+                icon: "ph-layout"
+            },
+            {
+                title: "Task Master",
+                description: "A productivity web app that helps users track daily goals, manage tasks with drag-and-drop features, and visualize progress over time.",
+                tags: ["React", "Firebase"],
+                link: "https://github.com/Shidh0/repo-3",
+                icon: "ph-check-square-offset"
+            },
+            {
+                title: "Terminal Utils",
+                description: "A collection of handy command-line interface tools designed to speed up daily development workflows and automate repetitive system tasks.",
+                tags: ["Python", "Shell"],
+                link: "https://github.com/Shidh0/repo-4",
+                icon: "ph-terminal"
+            }
+        ];
+
+        // --- 2. RENDER PROJECTS ---
+        const projectsGrid = document.getElementById('projects-grid');
+        
+        githubProjects.forEach((project, index) => {
+            const delay = index * 100; // Staggered animation delay
+            const tagsHtml = project.tags.map(tag => 
+                `<span class="text-xs font-medium px-2 py-1 rounded bg-white/5 text-slate-300">${tag}</span>`
+            ).join('');
+
+            const card = `
+                <div class="glass-card rounded-2xl p-8 flex flex-col h-full reveal relative overflow-hidden group" style="transition-delay: ${delay}ms">
+                    <!-- Hover gradient background effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-primary/20 transition-all">
+                            <i class="ph-duotone ${project.icon}"></i>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-brand-primary transition-colors">${project.title}</h3>
+                        
+                        <p class="text-slate-400 mb-6 flex-grow leading-relaxed">
+                            ${project.description}
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            ${tagsHtml}
+                        </div>
+                        
+                        <div class="flex items-center gap-4 mt-auto">
+                            <a href="${project.link}" target="_blank" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-primary transition-colors">
+                                <i class="ph-fill ph-github-logo text-lg"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            projectsGrid.innerHTML += card;
+        });
+
+        // --- 3. SCROLL ANIMATIONS (Intersection Observer) ---
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOptions = {
+            threshold: 0.15, // Trigger when 15% visible
+            rootMargin: "0px 0px -50px 0px" 
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // --- 4. NAVBAR SCROLL EFFECT ---
+        const navbar = document.getElementById('navbar');
+        const navContainer = document.getElementById('nav-container');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+                navContainer.classList.add('glass', 'shadow-lg');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+                navContainer.classList.remove('glass', 'shadow-lg');
+            }
+        });
+
+        // --- 5. MOBILE MENU TOGGLE ---
+        let menuOpen = false;
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            
+            menuOpen = !menuOpen;
+            
+            if(menuOpen) {
+                menu.classList.remove('translate-x-full');
+                icon.classList.remove('ph-list');
+                icon.classList.add('ph-x');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                menu.classList.add('translate-x-full');
+                icon.classList.add('ph-list');
+                icon.classList.remove('ph-x');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
