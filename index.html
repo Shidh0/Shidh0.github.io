@@ -314,77 +314,84 @@
 
     <!-- Scripts -->
     <script>
-        // --- 1. PROJECT DATA CONFIGURATION ---
-        const githubProjects = [
-            {
-                title: "AirCtrl-Http",
-                description: "Turn your smartphone's web camera into a wireless trackpad and air gesture control system for your PC! Built with MediaPipe Hands and WebSockets.",
-                tags: ["Python", "MediaPipe", "WebSockets"],
-                link: "https://github.com/Shidh0/AirCtrl-Http",
-                icon: "ph-hand-pointing"
-            },
-            {
-                title: "Instadowply",
-                description: "An app to download and watch Instagram FYP reels offline. Features asynchronous parallel downloading and cross-platform support (Android, Windows, Linux).",
-                tags: ["Android/Termux", "Node.js", "Shell"],
-                link: "https://github.com/Shidh0/instadowply",
-                icon: "ph-download-simple"
-            },
-            {
-                title: "Spotify Miniplayer Fix",
-                description: "A handy Chrome extension that fixes the 'You Have Discovered a Premium Feature' pop-up interruption in the Spotify web player.",
-                tags: ["JavaScript", "Chrome Extension"],
-                link: "https://github.com/Gamingarc16/Spotify-Miniplayer-Fix",
-                icon: "ph-music-notes"
-            },
-            {
-                title: "Backrooms",
-                description: "A game based on the Backrooms level 0 (Threshold), References taken from (https://backrooms-wiki.wikidot.com). Still Under development With Further levels to be added.Supports Android and Windows.",
-                tags: ["Android/Windows", "Unreal Engine 5", "3D Game"],
-                link: "https://Shidh.itch.io/Backrooms",
-                icon: "ph-game-controller-simple"
-        }
-        ];
+// --- 1. PROJECT DATA CONFIGURATION ---
+const githubProjects = [
+    {
+        title: "AirCtrl-Http",
+        description: "Turn your smartphone's web camera into a wireless trackpad and air gesture control system for your PC! Built with MediaPipe Hands and WebSockets.",
+        tags: ["Python", "MediaPipe", "WebSockets"],
+        link: "https://github.com/Shidh0/AirCtrl-Http",
+        icon: "ph-hand-pointing",
+        buttonText: "Source Code",
+        buttonIcon: "ph-github-logo"
+    },
+    {
+        title: "Instadowply",
+        description: "An app to download and watch Instagram FYP reels offline. Features asynchronous parallel downloading and cross-platform support (Android, Windows, Linux).",
+        tags: ["Android/Termux", "Node.js", "Shell"],
+        link: "https://github.com/Shidh0/instadowply",
+        icon: "ph-download-simple",
+        buttonText: "Source Code",
+        buttonIcon: "ph-github-logo"
+    },
+    {
+        title: "Spotify Miniplayer Fix",
+        description: "A handy Chrome extension that fixes the 'You Have Discovered a Premium Feature' pop-up interruption in the Spotify web player.",
+        tags: ["JavaScript", "Chrome Extension"],
+        link: "https://github.com/Gamingarc16/Spotify-Miniplayer-Fix",
+        icon: "ph-music-notes",
+        buttonText: "Source Code",
+        buttonIcon: "ph-github-logo"
+    },
+    {
+        title: "Backrooms",
+        description: "A 3D horror game based on the Backrooms level 0 (Threshold). Built in Unreal Engine 5 with further levels currently under development.",
+        tags: ["Android/Windows", "Unreal Engine 5", "3D Game"],
+        link: "https://Shidh.itch.io/Backrooms",
+        icon: "ph-game-controller",
+        buttonText: "View on Itch.io",
+        buttonIcon: "ph-game-controller"
+    }
+];
 
-        // --- 2. RENDER PROJECTS ---
-        const projectsGrid = document.getElementById('projects-grid');
-        
-        githubProjects.forEach((project, index) => {
-            const delay = index * 100; // Staggered animation delay
-            const tagsHtml = project.tags.map(tag => 
-                `<span class="text-xs font-medium px-2 py-1 rounded bg-white/5 text-slate-300">${tag}</span>`
-            ).join('');
+// --- 2. RENDER PROJECTS ---
+const projectsGrid = document.getElementById('projects-grid');
 
-            const card = `
-                <div class="glass-card rounded-2xl p-8 flex flex-col h-full reveal relative overflow-hidden group" style="transition-delay: ${delay}ms">
-                    <!-- Hover gradient background effect -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-primary/20 transition-all">
-                            <i class="ph-duotone ${project.icon}"></i>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-brand-primary transition-colors">${project.title}</h3>
-                        
-                        <p class="text-slate-400 mb-6 flex-grow leading-relaxed">
-                            ${project.description}
-                        </p>
-                        
-                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
-                            ${tagsHtml}
-                        </div>
-                        
-                        <div class="flex items-center gap-4 mt-auto">
-                            <a href="${project.link}" target="_blank" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-primary transition-colors">
-                                <i class="ph-fill ph-github-logo text-lg"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
+githubProjects.forEach((project, index) => {
+    const delay = index * 100;
+    const tagsHtml = project.tags.map(tag => 
+        `<span class="text-xs font-medium px-2 py-1 rounded bg-white/5 text-slate-300">${tag}</span>`
+    ).join('');
+
+    const card = `
+        <div class="glass-card rounded-2xl p-8 flex flex-col h-full reveal relative overflow-hidden group" style="transition-delay: ${delay}ms">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+                <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-primary/20 transition-all">
+                    <i class="ph-duotone ${project.icon}"></i>
                 </div>
-            `;
-            projectsGrid.innerHTML += card;
-        });
+                
+                <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-brand-primary transition-colors">${project.title}</h3>
+                
+                <p class="text-slate-400 mb-6 flex-grow leading-relaxed">
+                    ${project.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${tagsHtml}
+                </div>
+                
+                <div class="flex items-center gap-4 mt-auto">
+                    <a href="${project.link}" target="_blank" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-primary transition-colors">
+                        <i class="ph-fill ${project.buttonIcon || 'ph-github-logo'} text-lg"></i> ${project.buttonText || 'Source Code'}
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+    projectsGrid.innerHTML += card;
+});
 
         // --- 3. SCROLL ANIMATIONS (Intersection Observer) ---
         const revealElements = document.querySelectorAll('.reveal');
